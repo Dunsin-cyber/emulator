@@ -277,7 +277,7 @@ const (
 	OP_NUM2BIN                       = 0xd7 // 215
 	OP_BIN2NUM                       = 0xd8 // 216
 	OP_REVERSEBYTES                  = 0xd9 // 217
-	OP_UNKNOWN218                    = 0xda // 218
+	OP_MODEXP                        = 0xda // 218
 	OP_UNKNOWN219                    = 0xdb // 219
 	OP_UNKNOWN220                    = 0xdc // 220
 	OP_UNKNOWN221                    = 0xdd // 221
@@ -578,7 +578,7 @@ var opcodeArray = [256]opcode{
 	OP_NUM2BIN:                       {OP_NUM2BIN, "OP_NUM2BIN", 1, opcodeNum2Bin},
 	OP_BIN2NUM:                       {OP_BIN2NUM, "OP_BIN2NUM", 1, opcodeBin2Num},
 	OP_REVERSEBYTES:                  {OP_REVERSEBYTES, "OP_REVERSEBYTES", 1, opcodeReverseBytes},
-	OP_UNKNOWN218:                    {OP_UNKNOWN218, "OP_UNKNOWN218", 1, opcodeInvalid},
+	OP_MODEXP:                        {OP_MODEXP, "OP_MODEXP", 1, opcodeModexp},
 	OP_UNKNOWN219:                    {OP_UNKNOWN219, "OP_UNKNOWN219", 1, opcodeInvalid},
 	OP_UNKNOWN220:                    {OP_UNKNOWN220, "OP_UNKNOWN220", 1, opcodeInvalid},
 	OP_UNKNOWN221:                    {OP_UNKNOWN221, "OP_UNKNOWN221", 1, opcodeInvalid},
@@ -2412,6 +2412,65 @@ func opcodeMod(op *opcode, data []byte, vm *Engine) error {
 		return err
 	}
 	result, err := a.Mod(b)
+	if err != nil {
+		return err
+	}
+	return vm.dstack.PushBigNum(result)
+}
+
+// maxModexpOperandLen caps each OP_MODEXP operand at a conservative byte
+// length that fully covers elliptic-curve scalar arithmetic (secp256k1,
+// P-256, P-384, Curve25519, ed25519, BLS12-381 scalar field, etc.) and
+// modular inverse via Fermat for prime fields up to ~512 bits.
+//
+// This is purely a DoS brake: at the full 520-byte BigNum limit, one
+// OP_MODEXP call costs ~13 ms and the Arkade VM does not enforce a
+// per-script op-count limit. The cap can be lifted or removed once we
+// have a proper compute-budget model for heavy opcodes — e.g. weighting
+// OP_MODEXP against something like the BIP-342 sigop
+// budget, or introducing a generic compute-weight budget.
+const maxModexpOperandLen = 64
+
+// opcodeModexp pops modulus, exp, base and pushes (base^exp mod modulus)
+// in the canonical range [0, modulus). Fails the script if any operand
+// exceeds maxModexpOperandLen bytes, modulus <= 0, or exp < 0.
+//
+// Stack transformation: [... base exp modulus] -> [... base^exp mod modulus]
+func opcodeModexp(op *opcode, data []byte, vm *Engine) error {
+	modulus, err := vm.dstack.PopBigNum()
+	if err != nil {
+		return err
+	}
+	exp, err := vm.dstack.PopBigNum()
+	if err != nil {
+		return err
+	}
+	base, err := vm.dstack.PopBigNum()
+	if err != nil {
+		return err
+	}
+	checkSize := func(name string, n BigNum) error {
+		b, err := n.Bytes()
+		if err != nil {
+			return err
+		}
+		if len(b) > maxModexpOperandLen {
+			return scriptError(txscript.ErrNumberTooBig,
+				fmt.Sprintf("OP_MODEXP %s is %d bytes, exceeds limit of %d",
+					name, len(b), maxModexpOperandLen))
+		}
+		return nil
+	}
+	if err := checkSize("base", base); err != nil {
+		return err
+	}
+	if err := checkSize("exp", exp); err != nil {
+		return err
+	}
+	if err := checkSize("modulus", modulus); err != nil {
+		return err
+	}
+	result, err := base.Modexp(exp, modulus)
 	if err != nil {
 		return err
 	}
