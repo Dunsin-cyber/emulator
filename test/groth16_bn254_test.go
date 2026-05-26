@@ -5,7 +5,7 @@ import (
 	"math/big"
 	"testing"
 
-	"github.com/ArkLabsHQ/emulator/pkg/arkade"
+	"github.com/arkade-os/emulator/pkg/arkade"
 	"github.com/arkade-os/arkd/pkg/ark-lib/offchain"
 	"github.com/btcsuite/btcd/btcutil/psbt"
 	"github.com/btcsuite/btcd/txscript"

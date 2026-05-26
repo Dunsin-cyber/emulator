@@ -3,7 +3,7 @@ package client
 import (
 	"context"
 
-	emulatorv1 "github.com/ArkLabsHQ/emulator/api-spec/protobuf/gen/emulator/v1"
+	emulatorv1 "github.com/arkade-os/emulator/api-spec/protobuf/gen/emulator/v1"
 	"github.com/arkade-os/arkd/pkg/ark-lib/tree"
 	"google.golang.org/grpc"
 )

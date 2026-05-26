@@ -1,8 +1,8 @@
 # Emulator
 
-[![test](https://github.com/ArkLabsHQ/emulator/actions/workflows/test.yaml/badge.svg)](https://github.com/ArkLabsHQ/emulator/actions/workflows/test.yaml)
-[![quality](https://github.com/ArkLabsHQ/emulator/actions/workflows/quality.yaml/badge.svg)](https://github.com/ArkLabsHQ/emulator/actions/workflows/quality.yaml)
-[![Trivy Security Scan](https://github.com/ArkLabsHQ/emulator/actions/workflows/trivy.yaml/badge.svg)](https://github.com/ArkLabsHQ/emulator/actions/workflows/trivy.yaml)
+[![test](https://github.com/arkade-os/emulator/actions/workflows/test.yaml/badge.svg)](https://github.com/arkade-os/emulator/actions/workflows/test.yaml)
+[![quality](https://github.com/arkade-os/emulator/actions/workflows/quality.yaml/badge.svg)](https://github.com/arkade-os/emulator/actions/workflows/quality.yaml)
+[![Trivy Security Scan](https://github.com/arkade-os/emulator/actions/workflows/trivy.yaml/badge.svg)](https://github.com/arkade-os/emulator/actions/workflows/trivy.yaml)
 
 _Emulator is a signing service for the [Arkade](https://docs.arkadeos.com/) protocol, executing [Arkade Script](https://docs.arkadeos.com/experimental/arkade-script)._
 

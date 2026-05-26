@@ -7,8 +7,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/ArkLabsHQ/emulator/pkg/arkade"
-	emulatorclient "github.com/ArkLabsHQ/emulator/pkg/client"
+	"github.com/arkade-os/emulator/pkg/arkade"
+	emulatorclient "github.com/arkade-os/emulator/pkg/client"
 	arklib "github.com/arkade-os/arkd/pkg/ark-lib"
 	"github.com/arkade-os/arkd/pkg/ark-lib/offchain"
 	"github.com/arkade-os/arkd/pkg/ark-lib/script"

@@ -1,4 +1,4 @@
-module github.com/ArkLabsHQ/emulator/api-spec
+module github.com/arkade-os/emulator/api-spec
 
 go 1.26.3
 

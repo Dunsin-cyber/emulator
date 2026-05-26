@@ -686,7 +686,7 @@ const file_emulator_v1_service_proto_rawDesc = "" +
 	"/v1/intent\x12\x7f\n" +
 	"\x12SubmitFinalization\x12&.emulator.v1.SubmitFinalizationRequest\x1a'.emulator.v1.SubmitFinalizationResponse\"\x18\xb2J\x15B\x01*\"\x10/v1/finalization\x12t\n" +
 	"\x0fSubmitOnchainTx\x12#.emulator.v1.SubmitOnchainTxRequest\x1a$.emulator.v1.SubmitOnchainTxResponse\"\x16\xb2J\x13B\x01*\"\x0e/v1/onchain-txB\xa2\x01\n" +
-	"\x0fcom.emulator.v1B\fServiceProtoP\x01Z4github.com/ArkLabsHQ/emulator/emulator/v1;emulatorv1\xa2\x02\x03EXX\xaa\x02\vEmulator.V1\xca\x02\vEmulator\\V1\xe2\x02\x17Emulator\\V1\\GPBMetadata\xea\x02\fEmulator::V1b\x06proto3"
+	"\x0fcom.emulator.v1B\fServiceProtoP\x01Z4github.com/arkade-os/emulator/emulator/v1;emulatorv1\xa2\x02\x03EXX\xaa\x02\vEmulator.V1\xca\x02\vEmulator\\V1\xe2\x02\x17Emulator\\V1\\GPBMetadata\xea\x02\fEmulator::V1b\x06proto3"
 
 var (
 	file_emulator_v1_service_proto_rawDescOnce sync.Once

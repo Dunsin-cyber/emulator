@@ -22,7 +22,7 @@ run:
 
 test:
 	@echo "Running unit tests..."
-	@go test -v $$(go list ./... | grep -v '/test$$') github.com/ArkLabsHQ/emulator/pkg/arkade/... github.com/ArkLabsHQ/emulator/pkg/client/...
+	@go test -v $$(go list ./... | grep -v '/test$$') github.com/arkade-os/emulator/pkg/arkade/... github.com/arkade-os/emulator/pkg/client/...
 
 integrationtest:
 	@echo "Running integration test..."

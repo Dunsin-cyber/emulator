@@ -7,7 +7,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/ArkLabsHQ/emulator/pkg/arkade"
+	"github.com/arkade-os/emulator/pkg/arkade"
 	"github.com/arkade-os/arkd/pkg/ark-lib/extension"
 	arkscript "github.com/arkade-os/arkd/pkg/ark-lib/script"
 	"github.com/arkade-os/arkd/pkg/ark-lib/tree"
