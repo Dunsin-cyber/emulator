@@ -58,7 +58,7 @@ If this emulator is the last required non-`arkd` signer for all owned inputs mat
 
 ### SubmitIntent
 
-Signs an intent proof after validating the register message and executing Arkade scripts on the proof transaction. Must be called before intent registration.
+Signs an intent proof after validating the intent message and executing Arkade scripts on the proof transaction. Accepts any arkd intent message type (`register`, `delete`, `get-pending-tx`, `estimate-intent-fee`, `get-intent`, `get-data`), so contract VTXOs can authenticate every intent-based operation, not just registration.
 
 **Endpoint**: `POST /v1/intent`
 
@@ -67,7 +67,7 @@ Signs an intent proof after validating the register message and executing Arkade
 {
   "intent": {
     "proof": "base64_encoded_psbt",
-    "message": "base64_encoded_register_message"
+    "message": "base64_encoded_intent_message"
   }
 }
 ```
@@ -90,7 +90,7 @@ Conditionally signs forfeit and/or boarding inputs during batch finalization. On
 {
   "signedIntent": {
     "proof": "base64_encoded_signed_psbt",
-    "message": "base64_encoded_register_message"
+    "message": "base64_encoded_intent_message"
   },
   "forfeits": ["base64_encoded_forfeit_psbt1", "..."],
   "connectorTree": [
